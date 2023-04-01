@@ -1,0 +1,84 @@
+{% extends 'store/mobile/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'store/mobile/inc/navbar.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="login-form-form-cust">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div class="avatar-form-cust">
+                    <img src="{% static 'images/profile.png' %}" alt="Avatar">
+                </div>
+
+                <h2 class="text-center mt-4">Daftar Akun</h2>
+
+                <label for="" class="mt-3 col-sm-2 col-form-label">Username</label>
+                <div class="form-group">
+                    {{ form.username }}
+                    {% if form.errors.username %}
+                    <label class="text-danger">{{ form.errors.username }}</label>
+                    {% endif %}
+                </div>
+
+                <label for="" class="mt-3 col-sm-2 col-form-label">Email</label>
+                <div class="form-group">
+                    {{ form.email }}
+                    <div id="emailHelp" class="form-text">*Optional</div>
+                    {% if form.errors.email %}
+                    <label class="text-danger">{{ form.errors.email }}</label>
+                    {% endif %}
+                </div>
+
+                <label for="" class="mt-3 col-sm-2 col-form-label">Password</label>
+                <div class="form-group">
+                    <div style="position: relative;">
+                        {{ form.password1 }}
+                        <input class="far fa-eye" onclick="showPassword()" type="checkbox" style="
+                        position: absolute;
+                        top: 50%;
+                        right: 10px;
+                        transform: translateY(-50%);
+                        cursor: pointer;
+                      ">
+                        {% if form.errors.password1 %}
+                        <label class="text-danger">{{ form.errors.password1 }}</label>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <label for="" class="mt-3 col-sm-4 col-form-label">Masukan Kembali Password</label>
+                <div class="form-group">
+                    <div style="position: relative;">
+                        {{ form.password2 }}
+                        {% if form.errors.password1 %}
+                        <label class="text-danger">{{ form.errors.password2 }}</label>
+                        {% endif %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Daftar</button>
+                <p class="text-center">Sudah memiliki akun? <a href="{% url 'loginpage' %}"
+                        style="color: #9AC2C9;">Masuk</a>.</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showPassword() {
+        var passwordInput = document.getElementById("id_password1");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+</script>
+
+{% endblock content %}

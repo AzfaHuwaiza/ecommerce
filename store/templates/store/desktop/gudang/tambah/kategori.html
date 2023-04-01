@@ -1,0 +1,91 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="login-form-form-cust">
+            {% if pesan %}
+            <div class="alert alert-success">{{ pesan }}</div>
+            {% endif %}
+            <form action="{% url 'tambah_kategori' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">Tambah Kategori</h2>
+                <label for="" class="col-form-label"><label style="color: red;">*</label> (wajib diisi!)</label>
+                <br>
+                <label for="" class="col-sm-2 col-form-label">Slug<label style="color: red;">*</label></label>
+                <div class="form-group">
+                    {{ form.slug }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Nama Kategori<label style="color: red;">*</label></label>
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Foto<label style="color: red;">*</label></label>
+                <div class="form-group">
+                    {{ form.category_image }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Bahan<label style="color: red;">*</label></label>
+                <div class="form-group">
+                    {{ form.bahan }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+                <div class="form-group">
+                    {{ form.description }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Status</label>
+                <div class="form-group">
+                    {{ form.status }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Trending</label>
+                <div class="form-group">
+                    {{ form.trending }}
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-form-cust btn-primary btn-lg btn-block">Tambah</button>
+                    <a href="{% url 'gudang_kategori' %}" class="btn-form-cust btn-danger btn-lg btn-block">Kembali</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="body-form-cust">
+    <div class="login-form-form-cust">
+        <form action="#" method="post">
+            <div class="avatar-form-cust">
+                <img src="" alt="Avatar">
+            </div>
+            <h2 class="text-center">Member Login</h2>   
+            <div class="form-group">
+                <input type="text" class="form-control-form-cust" name="username" placeholder="Username" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control-form-cust" name="password" placeholder="Password" required="required">
+            </div>        
+            <div class="form-group">
+                <button type="submit" class="btn-form-cust btn-primary btn-lg btn-block">Sign in</button>
+            </div>
+            <div class="bottom-action clearfix">
+                <label class="float-left form-check-label"><input type="checkbox"> Ngewe kuyy</label>
+                <a href="#" class="float-right">Forgot Password?</a>
+            </div>
+        </form>
+        <p class="text-center small">Don't have an account? <a href="#">Sign up here!</a></p>
+    </div>
+</div> -->
+
+
+
+
+
+
+{% endblock content %}

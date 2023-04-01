@@ -1,0 +1,162 @@
+{% extends 'store/tablet/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section style="background-color: #eee;">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2">
+          <div class="container">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'profile' %}">Profile</a></li>
+            </ol>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+            <h5 class="my-3">{{ user.first_name }} {{ user.last_name }}</h5>
+            {% if user.is_superuser %}
+            <p class="text-muted mb-1">as Admin</p>
+            {% elif user.is_staff %}
+            <p class="text-muted mb-1">as Staff User</p>
+            {% else %}
+            <p class="text-muted mb-1">as User</p>
+            {% endif %}
+
+
+
+            <p class="text-muted mb-4">{{ user.profile.address }}, {{ user.profile.country }},
+              {{ user.profile.pincode }}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <a href="{% url 'ubah_profile' %}" class="btn ms-1"
+                style="border-color: #234143; background-color: #EDDADC; color: #234143;"
+                onMouseOver="this.style.background='#234143', this.style.color='#EDDADC'"
+                onMouseOut="this.style.background='#EDDADC', this.style.color='#234143'">Edit Profile</a>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fas fa-shop fa-lg fa-lg" style="color: #333333;"></i>
+                <p class="mb-0 ms-3"><a href="{% url 'collections' %}">Shop</a></p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fas fa-cart-shopping fa-lg" style="color: #333333;"></i>
+                <p class="mb-0 ms-3"><a href="{% url 'cart' %}">Keranjang</a></p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="far fa-heart fa-lg" style="color: #333333;"></i>
+                <p class="mb-0 ms-3"><a href="{% url 'wishlist' %}">Wishlist</a></p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fa-regular fa-boxes-stacked fa-lg" style="color: #333333;"></i>
+                <p class="mb-0 ms-3"><a href="{% url 'myorders' %}">My Order</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Username</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">@{{ user.username }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Full Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.email }} </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">No Hp</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.phone }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Alamat</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.address }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Kota / Kabupaten</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.city }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Provinsi</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.state }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Negara</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.country }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Kode Pos</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.profile.pincode }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

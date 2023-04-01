@@ -1,0 +1,79 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-2 mb-3">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'gudang' %}">Gudang</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'gudang_kategori' %}">Kategori</a>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <h3 class="text-left">Data Kategori</h3>
+    <hr>
+    <div class="card shadow">
+        <div class="card-body wishdata">
+            {% if user.is_superuser %}
+            <a href="{% url 'tambah_kategori' %}" class=" btn btn-primary my-4 float-end">Tambah Kategori</a>
+            {% endif %}
+            <table class="table table-bordered mt-4 mb-4" border="9">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="text-center" scope="col" style="width: 15%;">Nama</th>
+                        <th class="text-center" scope="col" style="width: 15%;">Bahan</th>
+                        <th class="text-center" scope="col" style="width: 50%;">Deskripsi</th>
+                        {% if user.is_superuser %}
+                        <th class="text-center" scope="col" style="width: 20%;">Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kategori in kategoris %}
+                    <tr>
+                        <td>{{ kategori.name }}</td>
+                        <td>{{ kategori.bahan }}</td>
+                        <td>{{ kategori.description }}</td>
+                        {% if user.is_superuser %}
+                        <td align="center ">
+                            <a class="btn btn-warning me-3 my-1" href="{% url 'ubah_kategori' kategori.id %}">Ubah</a>
+                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#hapus-{{ kategori.id }}">Hapus</button>
+                        </td>
+                        <div class="modal" id="hapus-{{ kategori.id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">
+                                            Hapus
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus kategori <strong>
+                                            {{ kategori.name | upper }}</strong>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-dark" data-bs-dismiss="modal">Batal</button>
+                                        <a href="{% url 'hapus_kategori' kategori.id %}"
+                                            class="btn btn-danger">Hapus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

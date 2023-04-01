@@ -1,0 +1,57 @@
+{% extends 'store/tablet/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="login-form-form-cust">
+            {% for message in messages %}
+            {% if message %}
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+            {% endfor %}
+            <form action="{% url 'ubah_kategori' kategori.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">Ubah Kategori</h2>
+                <label for="" class="col-sm-2 col-form-label">Slug</label>
+                <div class="form-group">
+                    {{ form.slug }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Nama Produk</label>
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Foto Kategori</label>
+                <div class="form-group">
+                    {{ form.category_image }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Bahan</label>
+                <div class="form-group">
+                    {{ form.bahan }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+                <div class="form-group">
+                    {{ form.description }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Status</label>
+                <div class="form-group">
+                    {{ form.status }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Trending</label>
+                <div class="form-group">
+                    {{ form.trending }}
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-form-cust btn-primary btn-lg btn-block">Simpan</button>
+                    <a href="{% url 'gudang_kategori' %}" class="btn-form-cust btn-danger btn-lg btn-block">Kembali</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

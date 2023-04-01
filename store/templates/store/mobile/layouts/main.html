@@ -1,0 +1,219 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block title %}
+  <title>
+
+  </title>
+  {% endblock title %}
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" type="text/css" media="screen">
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" type="text/css" media="screen" />
+
+  <!-- Custom CSS -->
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/404notfound.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/carousel.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/form.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/wishlist.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="{% static 'css/card-product.css' %}" type="text/css" media="screen" />
+
+  <!-- CDN CSS -->
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Viga&display=swap">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway&display=swap">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="icon" href="https://assets.tokopedia.net/assets-tokopedia-lite/v2/arael/kratos/36c1015e.png" />
+
+
+
+  <style>
+    * {
+      font-family: 'Viga', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    .product-viewtag {
+      background-color: red;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      position: absolute;
+      text-align: center;
+      text-transform: uppercase;
+      top: 22px;
+      margin-left: 17.5rem;
+      padding: 7px 10px;
+      font-weight: 600;
+      min-width: 45px;
+    }
+  </style>
+
+  {% block style %}
+  {% endblock style %}
+
+</head>
+
+<body>
+
+  {% block content %}
+
+  {% endblock %}
+
+
+  <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat" target="_blank" class="whatsapp-chat">
+    <img src="{% static '/images/whatsapp.png' %}" alt="whatsapp logo" width="50px">
+  </a>
+
+  {% include 'store/mobile/inc/footer.html' %}
+
+  <!-- CDN JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
+  <!-- Bootstrap JS -->
+
+  <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+
+  <!-- Font Awesome JS -->
+
+  <script src="{% static 'js/font-awesome/all.js' %}"></script>
+
+  <script src="{% static 'js/font-awesome/all.min.js' %}"></script>
+
+  <!-- Owl Carousel -->
+
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+  <!-- Custom JS -->
+
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <script src="{% static 'js/show-password.js' %}"></script>
+
+
+
+
+  <!-- Manual JS -->
+
+  <script>
+    var availableTags = []
+
+    $.ajax({
+      mothod: "GET",
+      url: "/product-list",
+      success: function (response) {
+        console.log(response);
+        startAutocomplete(response);
+      }
+    });
+
+    function startAutocomplete(availableTags) {
+      $("#searchproducts").autocomplete({
+        source: availableTags
+      });
+    }
+
+  </script>
+
+  <script>
+    alertify.set('notifier', 'position', 'top-right');
+
+    {% for msg in messages %}
+    alertify.success('{{ msg }}');
+    {% endfor %}
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // make it as accordion for smaller screens
+      if (window.innerWidth > 992) {
+
+        document.querySelectorAll('.navbar .nav-item').forEach(function (everyitem) {
+
+          everyitem.addEventListener('mouseover', function (e) {
+
+            let el_link = this.querySelector('a[data-bs-toggle]');
+
+            if (el_link != null) {
+              let nextEl = el_link.nextElementSibling;
+              el_link.classList.add('show');
+              nextEl.classList.add('show');
+            }
+
+          });
+          everyitem.addEventListener('mouseleave', function (e) {
+            let el_link = this.querySelector('a[data-bs-toggle]');
+
+            if (el_link != null) {
+              let nextEl = el_link.nextElementSibling;
+              el_link.classList.remove('show');
+              nextEl.classList.remove('show');
+            }
+
+
+          })
+        });
+
+      }
+      // end if innerWidth
+    });
+// DOMContentLoaded  end
+  </script>
+
+  {% block script %}
+
+  {% endblock script %}
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="login-form-form-cust">
+            {% for message in messages %}
+            {% if message %}
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+            {% endfor %}
+            <form action="{% url 'ubah_produk' produk.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">Ubah Produk</h2>
+                <label for="" class="col-sm-2 col-form-label">Slug</label>
+                <div class="form-group">
+                    {{ form.slug }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Nama Produk</label>
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Foto</label>
+                <div class="form-group">
+                    {{ form.product_image }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Small Description</label>
+                <div class="form-group">
+                    {{ form.small_description }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Ukuran</label>
+                <div class="form-group">
+                    {{ form.size }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">QTY</label>
+                <div class="form-group">
+                    {{ form.kuantitas }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Stok</label>
+                <div class="form-group">
+                    {{ form.stok }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Kategori</label>
+                <div class="form-group">
+                    {{ form.kategori }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Harga</label>
+                <div class="form-group">
+                    {{ form.selling_price }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+                <div class="form-group">
+                    {{ form.description }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Status</label>
+                <div class="form-group">
+                    {{ form.status }}
+                </div>
+                <label for="" class="col-sm-2 col-form-label">Trending</label>
+                <div class="form-group">
+                    {{ form.trending }}
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-form-cust btn-primary btn-lg btn-block">Simpan</button>
+                    <a href="{% url 'gudang_produk' %}" class="btn-form-cust btn-danger btn-lg btn-block">Kembali</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'store/mobile/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block style %}
+<style>
+    .text-main {
+        font-size: 20px;
+    }
+
+    .text-title {
+        font-size: 14px;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+{% include 'store/mobile/inc/navbar.html' %}
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2" style="font-size: 12px;">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'collections' %}">Collection</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'collectionsview' category.slug %} ">{{ category.name }}</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-12 mt-1 ms-1">
+            <h1 class="text-main"> {{ category.name }} </h1>
+            <hr>
+            <div class="row">
+                {% for item in products %}
+                <div class="col-6 mb-3">
+                    <div class="card">
+                        <a href="{% url 'productview' item.kategori.slug item.slug %}">
+                            <div class="category-image">
+                                <img src="{{ item.product_image.url }}" class="card-img-top" alt="Laptop" />
+                                <div class="p-2">
+                                    <div class="text-dark">
+                                        <h6 class="mb-1 text-title">{{ item.name }}
+                                        </h6>
+                                        <p class="mb-3" style="font-size: 10px;">
+                                            {{ item.size }}</p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <p style="font-size: 15px;" class="text-dark mb-0">
+                                            Rp {{ item.selling_price | stringformat:'d' | intcomma }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <p style="font-size: 10px;" class="text-dark mb-0">Stok: <span class="fw-bold">
+                                                {{ item.stok }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

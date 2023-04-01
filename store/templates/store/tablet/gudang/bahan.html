@@ -1,0 +1,80 @@
+{% extends 'store/tablet/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-2 mb-3">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'gudang' %}">Gudang</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'gudang_bahan' %}">Bahan</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <h3 class="text-left">Data Bahan</h3>
+    <hr>
+    <div class="card shadow">
+        <div class="card-body wishdata">
+            {% if user.is_superuser %}
+            <a href="{% url 'tambah_bahan' %}" class=" btn btn-primary my-4 float-end">Tambah Bahan</a>
+            {% endif %}
+            <table class="table table-bordered mt-4 mb-4" border="9">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="text-center">Nama</th>
+                        <th scope="col" class="text-center">Tanggal Rilis</th>
+                        {% if user.is_superuser %}
+                        <th class="text-center" scope="col" style="width: 30%;">Action</th>
+                        {% endif %}
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bahan in bahans %}
+                    <tr>
+                        <td class="text-center">{{ bahan.name }}</td>
+                        <td class="text-center">{{ bahan.create_at }}</td>
+                        {% if user.is_superuser %}
+                        <td align="center">
+                            <a class="btn btn-warning me-3" href="{% url 'ubah_bahan' bahan.id %}">Ubah</a>
+                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#hapus-{{ bahan.id }}">Hapus</button>
+                        </td>
+                        <div class="modal" id="hapus-{{ bahan.id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">
+                                            Hapus
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus bahan <strong>
+                                            {{ bahan.name | upper}}</strong>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-dark" data-bs-dismiss="modal">Batal</button>
+                                        <a href="{% url 'hapus_bahan' bahan.id %}" class="btn btn-danger">Hapus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

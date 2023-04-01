@@ -1,0 +1,64 @@
+{% block style %}
+<style>
+    .navbar {
+        background-color: transparent;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .navbar ul li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .navbar ul li a {
+        color: #fff;
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+    }
+
+    .back-button {
+        color: #fff;
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        text-decoration: none;
+    }
+
+    .content {
+        height: 2000px;
+        background-color: #eee;
+    }
+
+    .navbar-scroll {
+        background-color: #234143;
+    }
+</style>
+{% endblock style %}
+
+{% block script %}
+<script>
+    window.addEventListener('scroll', function () {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('navbar-scroll', window.scrollY > 0);
+    });
+</script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+{% endblock script %}

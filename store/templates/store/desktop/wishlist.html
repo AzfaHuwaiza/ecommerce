@@ -1,0 +1,87 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+
+<div class="container py-3" style="margin-bottom: 30%;">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-2 mb-3">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'wishlist' %}">Wishlist</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-heading mb-10">My Wishlist</div>
+                <div class="table-wishlist">
+                    <div class="card shadow">
+                        <div class="card-body wishdata">
+                            <div class="row">
+                                {% if wishlist %}
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25px;" class="text-center">Gambar</th>
+                                            <th width="" class="text-center">Nama</th>
+                                            <th width="" class="text-center">Harga</th>
+                                            <th width="" class="text-center">Lihat Produk</th>
+                                            <th width="" class="text-center">Hapus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in wishlist %}
+                                        <tr class="product_data">
+                                            <td width="">
+                                                <div class="display-flex align-center">
+                                                    <div class="img-product">
+                                                        <img src="{{item.product.product_image.url}}" height="70px"
+                                                            alt="Image here">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.product.name }}
+                                            </td>
+                                            <td class="text-center">
+                                                Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
+                                            </td>
+                                            <td align="center">
+                                                <input type="hidden" class="prod_id" value="{{ item.product_id }}">
+                                                {% csrf_token %}
+                                                <a href="{% url 'productview' item.product.kategori.slug item.product.slug %}"
+                                                    class="btn btn-primary">
+                                                    <i class="fa fa-eye"></i> Lihat
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-danger delete-wishlist-item"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                <h4>Wishlist Anda kosong</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

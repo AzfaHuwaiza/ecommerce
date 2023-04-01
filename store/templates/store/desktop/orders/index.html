@@ -1,0 +1,167 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Transaksi
+{% endblock title %}
+
+{% block style %}
+<style>
+    .btn-size {
+        width: 15%;
+        font-size: 12px;
+    }
+
+    .btn-wa {
+        width: 4%;
+        font-size: 12px;
+    }
+
+
+    .warna-dasar {
+        color: #53b4bb;
+    }
+
+    .warna-dasar:hover {
+        color: black;
+    }
+
+    .btn-dasar {
+        background-color: #53b4bb;
+        color: white;
+    }
+
+    .btn-dasar:hover {
+        border: solid 1px;
+        background-color: white;
+        color: #53b4bb;
+    }
+
+    .btn-hati {
+        background-color: #ff4949;
+        color: white;
+    }
+
+    .btn-hati:hover {
+        border: solid 1px;
+        background-color: white;
+        color: #ff4949;
+    }
+
+    .btn-hati {
+        border: solid 1px;
+        background-color: white;
+        color: #ff4949;
+    }
+
+    .btn-hati:hover {
+        background-color: #ff4949;
+        color: white;
+    }
+
+    .btn-daun {
+        color: white;
+        background-color: #0b7c1e;
+    }
+
+    .btn-daun:hover {
+        border: solid 1px;
+        color: #0b7c1e;
+        background-color: white;
+    }
+
+    .btn-abu {
+        border: solid 1px;
+        color: #6b6b6b;
+        background-color: white;
+    }
+
+    .btn-abu:hover {
+        background-color: #6b6b6b;
+        color: white;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container py-3" style="margin-bottom:30%;">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-2 mb-3">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'myorders' %}">My
+                                Order</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow ">
+                    <div class="card-header">
+                        <h3 class="mb-0">Daftar Transaksi
+                        </h3>
+                    </div>
+                    {% for item in orders %}
+                    <div class="card-body">
+                        <div class="card shadow ">
+                            <div class="p-3">
+                                <label class="">{{ item.created_at}}</label>
+                                {% if item.status == 'Pending' %}
+                                <label class="bg-warning text-dark px-1 rounded"> Tertunda </label>
+                                {% elif item.status == 'Cancelled' %}
+                                <label class="bg-danger text-light px-1 rounded"> Dibatalkan </label>
+                                {% elif item.status == 'Shipped' %}
+                                <label class="bg-primary text-light px-1 rounded"> Dikirim </label>
+                                {% elif item.status == 'Completed' %}
+                                <label class="bg-success text-light px-1 rounded"> Selesai </label>
+                                {% endif %}
+                                |
+                                <label class=""> {{ item.tracking_no }} </label>
+                                <hr>
+                                <p>
+                                    Total Harga: Rp {{ item.total_price | stringformat:'d' | intcomma }}
+                                    {% if item.status == 'Pending' %}
+                                    <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                        target="_blank" class="btn btn-daun float-end mx-2 btn-wa"><i
+                                            class=" fab fa-whatsapp"></i></a>
+                                    <a href="{% url 'order.cancel' item.tracking_no %}"
+                                        class="btn btn-hati float-end mx-2 btn-size">Batalkan Pesanan</a>
+                                    {% elif item.status == 'Shipped' %}
+                                    <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                        target="_blank" class="btn btn-daun float-end mx-2 btn-size"><i class=" fab
+                                    fa-whatsapp"></i>
+                                        Hubungi</a>
+                                    {% elif item.status == 'Completed' %}
+                                    <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                        target="_blank" class="btn btn-daun float-end mx-2 btn-size"><i class=" fab
+                                    fa-whatsapp"></i>
+                                        Rating</a>
+                                    {% elif item.status == 'Cancelled' %}
+                                    <a href="{% url 'collections' %}" class="btn btn-abu float-end mx-2 btn-size"><i
+                                            class="fa fa-shop"></i>
+                                        Belanja</a>
+                                    {% endif %}
+                                    <a href="{% url 'orderview' item.tracking_no %}"
+                                        class="btn warna-dasar float-end mx-2 btn-size">Lihat
+                                        Pesanan</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

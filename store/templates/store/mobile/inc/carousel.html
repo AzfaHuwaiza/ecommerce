@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block style %}
+
+<style>
+  .carousel-caption {
+    margin-bottom: 1%;
+    margin-left: 0%;
+  }
+
+  .carousel-caption a {
+    display: inline-block;
+    text-transform: uppercase;
+    color: #347b88;
+    text-decoration: none;
+    border: 3px solid;
+    background: transparent;
+    padding: 4px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+</style>
+{% endblock style %}
+
+
+
+<div class="carousel-cust">
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/carousel1.png' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption">
+          <a class="btn" href="{% url 'collections' %}">shop now</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/carousel2.png' %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/carousel3.png' %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+body {
+  background-color: #EFEBEC;
+}
+
+.whatsapp-chat {
+  position: fixed;
+  z-index: 100;
+  bottom: 05% !important;
+  left: 03% !important;
+}

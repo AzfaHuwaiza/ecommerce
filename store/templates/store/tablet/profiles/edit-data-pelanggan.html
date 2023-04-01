@@ -1,0 +1,85 @@
+{% extends 'store/tablet/layouts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="login-form-form-cust">
+      {% for message in messages %}
+      {% if message %}
+      <div class="alert alert-success">{{ message }}</div>
+      {% endif %}
+      {% endfor %}
+      <form method="POST">
+        {% csrf_token %}
+        <h2 class="text-center">Ubah Data Pelanggan</h2>
+        <label for="" class="col-sm-2 col-form-label">Username : </label>
+        <div class="form-group">
+          {{ user_form.username }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Email :</label>
+        <div class="form-group">
+          {{ user_form.email }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Nama Depan :</label>
+        <div class="form-group">
+          {{ user_form.first_name }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Nama Belakang :</label>
+        <div class="form-group">
+          {{ user_form.last_name }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Alamat :</label>
+        <div class="form-group">
+          {{ profile_form.address }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Kota :</label>
+        <div class="form-group">
+          {{ profile_form.city }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Provinsi :</label>
+        <div class="form-group">
+          {{ profile_form.state }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Negara :</label>
+        <div class="form-group">
+          {{ profile_form.country }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Tanggal Lahir :</label>
+        <div class="form-group">
+          {{ profile_form.tgl_lahir }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">No. Hp :</label>
+        <div class="form-group">
+          {{ profile_form.phone }}
+        </div>
+        <label for="" class="col-sm-2 col-form-label">Kode Pos :</label>
+        <div class="form-group">
+          {{ profile_form.pincode }}
+        </div>
+        <div class="d-flex justify-content-around">
+          <div style="border-left:1px solid #000;"></div>
+          <label for="" class="col-sm-2 col-form-label">Status Aktif</label>
+          {{ user_form.is_active }}
+          <div style="border-left:1px solid #000;"></div>
+          <label for="" class="col-sm-2 col-form-label">Status Staff</label>
+          {{ user_form.is_staff }}
+          <div style="border-left:1px solid #000;"></div>
+          <label for="" class="col-sm-2 col-form-label">Status Super User</label>
+          {{ user_form.is_superuser }}
+          <div style="border-left:1px solid #000;"></div>
+        </div>
+        <div class="form-group mt-3">
+          <button type="submit" class="btn-form-cust btn-primary btn-lg btn-block">Simpan</button>
+          <a href="{% url 'data_pelanggan' %}" class="btn-form-cust btn-danger btn-lg btn-block">Kembali</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

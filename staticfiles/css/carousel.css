@@ -1,0 +1,31 @@
+.carousel-cust {
+    margin-left: 0%;
+}
+
+
+/* BTN Carousel */
+.carousel-caption {
+    margin-bottom: 10%;
+    margin-left: 0%;
+}
+
+.carousel-caption a {
+    display: inline-block;
+    text-transform: uppercase;
+    color: #347b88;
+    text-decoration: none;
+    border: 3px solid;
+    background: transparent;
+    padding: 10px 40px;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.carousel-caption a:hover {
+    color: #234143;
+    background: #EDDADC;
+    border: 3px solid;
+
+}

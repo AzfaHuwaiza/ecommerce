@@ -1,0 +1,102 @@
+{% extends 'store/mobile/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-navbar-cust">
+    <!-- Button Hamburger -->
+    <div class="container">
+        <div class="ms-3 col-1">
+            <div class="float-left">
+                <a href="#" onclick="history.back(); return false;" class="back-buttton" style="color: #eee;"><i
+                        class="fa fa-arrow-left"></i></a>
+            </div>
+        </div>
+        <div class="col-5">
+            <h6 class="offcanvas-title" style="color: #EFEBEC; font-size: 15px;" id="offcanvasExampleLabel">
+                Wishlist
+            </h6>
+        </div>
+        <div class="col-5">
+            <a class="btn text-light" href="{% url 'home' %}"><i class="fa fa-house"></i></a>
+            <a class="btn text-light" href="{% url 'cart' %}"><i class="fas fa-cart-shopping"></i></a>
+            <a class="btn text-light" href="{% url 'profile' %}"><i class="far fa-user"></i></a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-3" style="margin-bottom: 30%;">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2" style="font-size: 12px;">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'wishlist' %}">Wishlist</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-12 mt-1 ms-1">
+            <div class="main-heading mb-1">My Wishlist</div>
+            <hr>
+            <div class="wishdata">
+                <div class="row ">
+                    {% if wishlist %}
+                    {% for item in wishlist %}
+                    <div class="product_data">
+                        <div class="col-6 mb-3">
+                            <div class="card">
+                                <a href="{% url 'productview' item.product.kategori.slug item.product.slug %}">
+                                    <div class="category-image">
+                                        <img src="{{ item.product.product_image.url }}" class="card-img-top"
+                                            alt="Image product" />
+                                        <div class="p-2">
+                                            <div class="text-dark">
+                                                <h6 class="mb-1 text-title">{{ item.product.name }}
+                                                </h6>
+                                                <p class="mb-3" style="font-size: 10px;">
+                                                    {{ item.product.size }}</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <p style="font-size: 15px;" class="text-dark mb-0">
+                                                    Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <p style="font-size: 10px;" class="text-dark mb-0">Stok: <span
+                                                        class="fw-bold">
+                                                        {{ item.product.stok }}</span>
+                                                </p>
+                                                <button class="btn btn-outline-dark delete-wishlist-item"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <h4>Wishlist Anda kosong</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

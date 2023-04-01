@@ -1,0 +1,135 @@
+{% extends 'store/desktop/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container py-3" style="margin-bottom: 0%;">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-2 mb-3">
+                <div class="container">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'chechout' %}">Chechout</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <form action="{% url 'placeorder' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-7 mb-3">
+                    <div class="card shadow ">
+                        <div class="card-body">
+                            <h6>Ringkasan Pesanan</h6>
+                            <hr>
+                            {% if cartitems %}
+                            <table class="table table-stripeds table-bordereds">
+                                <thead>
+                                    <tr>
+                                        <th>Produk</th>
+                                        <th>Qty</th>
+                                        <th>Harga</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cartitems %}
+                                    <tr>
+                                        <td>
+                                            <img src="{{ item.product.product_image.url }}" class="me-2" height="50px"
+                                                width="50px">
+                                            {{ item.product.name }}
+                                        </td>
+                                        <td>{{ item.product_qty }}</td>
+                                        <td>
+                                            Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <h6 class="fw-bold">Total Belanja
+                                <span class="float-end">Rp {{ total_price | stringformat:'d' | intcomma }}</span>
+                            </h6>
+                            <input type="hidden" value="COD" name="payment_mode">
+
+                            {% else %}
+                            <h4>Your cart is empty</h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h6>Alamat Pengiriman</h6>
+                            <hr>
+                            <div class="row checkoutform">
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Nama Depan</label>
+                                    <input type="text" class="form-control" value="{{ user.first_name }}"
+                                        placeholder="Input first name" name="fname" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Nama Belakang</label>
+                                    <input type="text" class="form-control" value="{{ user.last_name }}"
+                                        placeholder="Input last name" name="lname" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Email</label>
+                                    <input type="text" class="form-control" value="{{ user.email }}"
+                                        placeholder="Input Email" name="email" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">No. HP</label>
+                                    <input type="text" class="form-control" value="{{ userprofile.phone }}"
+                                        placeholder="Input Phone" name="phone" required>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="">Alamat</label>
+                                    <textarea class="form-control" placeholder="Input Address" name="address"
+                                        required>{{ userprofile.address }}</textarea>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Kota</label>
+                                    <input type="text" class="form-control" value="{{ userprofile.city }}"
+                                        placeholder="Input City" name="city" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Provinsi</label>
+                                    <input type="text" class="form-control" value="{{ userprofile.state }}"
+                                        placeholder="Input State" name="state" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Negara</label>
+                                    <input type="text" class="form-control" value="{{ userprofile.country }}"
+                                        placeholder="Input Country" name="country" required>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Kode Pos</label>
+                                    <input type="text" class="form-control" value="{{ userprofile.pincode }}"
+                                        placeholder="Input PIN Code" name="pincode" required>
+                                </div>
+                                <hr class="mt-3">
+                                <h5 class="fw-bold">Total Tagihan
+                                    <span class="float-end">Rp {{ total_price | stringformat:'d' | intcomma }}</span>
+                                </h5>
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-success w-100">COD | Price Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
