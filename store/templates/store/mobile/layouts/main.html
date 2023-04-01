@@ -7,11 +7,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  {% block title %}
   <title>
-
+    {% block title %}
+    {% endblock title %}
   </title>
-  {% endblock title %}
 
   <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" type="text/css" media="screen">
 
@@ -95,9 +94,7 @@
 <body>
 
   {% block content %}
-
   {% endblock %}
-
 
   <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat" target="_blank" class="whatsapp-chat">
     <img src="{% static '/images/whatsapp.png' %}" alt="whatsapp logo" width="50px">
@@ -212,7 +209,6 @@
   </script>
 
   {% block script %}
-
   {% endblock script %}
 </body>
 

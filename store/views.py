@@ -67,28 +67,26 @@ def ubah_profile(request):
     else:
         template_name = 'store/desktop/profiles/edit-profile.html'
 
-    if request.user.is_superuser:
-        user = request.user
-        profile = user.profile
+    user = request.user
+    profile = user.profile
 
-        if request.method == 'POST':
-            user_form = FormEditUser(request.POST, instance=user)
-            profile_form = FormEditProfile(request.POST, instance=profile)
+    if request.method == 'POST':
+        user_form = FormEditUser(request.POST, instance=user)
+        profile_form = FormEditProfile(request.POST, instance=profile)
 
-            if user_form.is_valid() and profile_form.is_valid():
-                user_form.save()
-                profile_form.save()
-                messages.success(request, 'Profile anda sukses!')
-                return redirect('profile')
-        else:
-            user_form = FormEditUser(instance=user)
-            profile_form = FormEditProfile(instance=profile)
-
-        context = {'user_form': user_form, 'profile_form': profile_form}
-        return render(request, template_name, context)
-
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile anda sukses!')
+            return redirect('profile')
     else:
-        return render(request, 'store/desktop/forbidden.html')
+        user_form = FormEditUser(instance=user)
+        profile_form = FormEditProfile(instance=profile)
+
+    context = {'user_form': user_form, 'profile_form': profile_form}
+    return render(request, template_name, context)
+
+   
 
 
 def home(request):

@@ -2,6 +2,40 @@
 
 {% load static %}
 
+
+{% block style %}
+<style>
+  .text-xxl {
+    font-size: 20px;
+  }
+
+  .text-xl {
+    font-size: 18px;
+  }
+
+  .text-l {
+    font-size: 16px;
+  }
+
+  .text-m {
+    font-size: 14px;
+  }
+
+  .text-s {
+    font-size: 12px;
+  }
+
+  .text-xs {
+    font-size: 10px;
+  }
+
+  .text-xxs {
+    font-size: 8px;
+  }
+</style>
+{% endblock style %}
+
+
 {% block content %}
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-navbar-cust">
@@ -32,7 +66,7 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2" style="font-size: 12px;">
           <div class="container">
-            <ol class="breadcrumb mb-0">
+            <ol class="breadcrumb mb-0 text-xs">
               <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'profile' %}">Profile</a></li>
             </ol>
@@ -42,7 +76,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-12">
         <div class="card mb-4">
           <div class="card-body text-center">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
@@ -70,7 +104,7 @@
             </div>
           </div>
         </div>
-        <div class="card mb-4 mb-lg-0">
+        <div class="card mb-4 mb-0">
           <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex align-items-center p-3">
@@ -93,86 +127,86 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-12">
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Username</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">@{{ user.username }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Full Name</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.first_name }} {{ user.last_name }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Email</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.email }} </p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">No Hp</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.phone }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Alamat</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.address }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Kota / Kabupaten</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.city }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Provinsi</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.state }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Negara</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.country }}</p>
               </div>
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-12">
                 <p class="mb-0">Kode Pos</p>
               </div>
-              <div class="col-sm-9">
+              <div class="col-12">
                 <p class="text-muted mb-0">{{ user.profile.pincode }}</p>
               </div>
             </div>

@@ -3,39 +3,76 @@
 {% load static %}
 {% load humanize %}
 
+{% block style %}
+<style>
+    .text-xxl {
+        font-size: 20px;
+    }
+
+    .text-xl {
+        font-size: 18px;
+    }
+
+    .text-l {
+        font-size: 16px;
+    }
+
+    .text-m {
+        font-size: 14px;
+    }
+
+    .text-s {
+        font-size: 12px;
+    }
+
+    .text-xs {
+        font-size: 10px;
+    }
+
+    .text-xxs {
+        font-size: 8px;
+    }
+</style>
+{% endblock style %}
+
 {% block content %}
 
-{% include 'store/mobile/inc/navbar.html' %}
-
-<div class="container py-3" style="margin-bottom: 0%;">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2" style="font-size: 12px;">
-                <div class="container">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a
-                                href="{% url 'chechout' %}">Chechout</a>
-                        </li>
-                    </ol>
-                </div>
-            </nav>
+<nav class="navbar navbar-expand-sm navbar-dark bg-navbar-cust">
+    <!-- Button Hamburger -->
+    <div class="container">
+        <div class="ms-3 col-1">
+            <div class="float-left">
+                <a href="#" onclick="history.back(); return false;" class="back-buttton" style="color: #eee;"><i
+                        class="fa fa-arrow-left"></i></a>
+            </div>
+        </div>
+        <div class="col-5">
+            <h6 class="offcanvas-title" style="color: #EFEBEC; font-size: 15px;" id="offcanvasExampleLabel">
+                Checkout
+            </h6>
+        </div>
+        <div class="col-5">
+            <a class="btn text-light" href="{% url 'wishlist' %}"><i class="far fa-heart"></i></a>
+            <a class="btn text-light" href="{% url 'cart' %}"><i class="fas fa-cart-shopping"></i></a>
+            <a class="btn text-light" href="{% url 'profile' %}"><i class="far fa-user"></i></a>
         </div>
     </div>
+</nav>
+<div class="container py-3" style="margin-bottom: 0%;">
+
 
     <div class="container mt-3">
         <form action="{% url 'placeorder' %}" method="POST">
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-7 mb-3">
+                <div class="col-12 mb-3">
                     <div class="card shadow ">
                         <div class="card-body">
-                            <h6>Ringkasan Pesanan</h6>
+                            <h6 class="text-l">Ringkasan Pesanan</h6>
                             <hr>
-                            {% if cartitems %}
                             <table class="table table-stripeds table-bordereds">
                                 <thead>
-                                    <tr style="font-size: 12px;">
+                                    <tr class="text-s">
                                         <th>Produk</th>
                                         <th>Qty</th>
                                         <th>Harga</th>
@@ -51,78 +88,76 @@
                                                         height="50px" width="50px">
                                                 </div>
                                                 <div class="col-10">
-                                                    <div class="ms-5 mb-0">{{ item.product.name }}</div>
+                                                    <div class="ms-5 mb-0 text-xs">{{ item.product.name }}</div>
                                                 </div>
                                             </div>
 
                                         </td>
-                                        <td style="font-size: 12px;">{{ item.product_qty }}</td>
-                                        <td style="font-size: 12px;">
+                                        <td class="text-xs">{{ item.product_qty }}</td>
+                                        <td class="text-xs">
                                             Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
                                         </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            <h6 class="fw-bold" style="font-size: 15px;">Total Belanja
-                                <span class="float-end" style="font-size: 15px;">Rp
+                            <h6 class="fw-bold text-m">Total Belanja
+                                <span class="float-end">Rp
                                     {{ total_price | stringformat:'d' | intcomma }}</span>
                             </h6>
                             <input type="hidden" value="COD" name="payment_mode">
 
-                            {% else %}
-                            <h4>Your cart is empty</h4>
-                            {% endif %}
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-12">
                     <div class="card shadow">
                         <div class="card-body">
-                            <h6>Alamat Pengiriman</h6>
+                            <h6 class="text-l">Alamat Pengiriman</h6>
                             <hr>
                             <div class="row checkoutform">
-                                <div class="col-md-6">
+                                <div class="col-12 my-1">
                                     <label for="">Nama Depan</label>
                                     <input type="text" class="form-control" value="{{ user.first_name }}"
                                         placeholder="Input first name" name="fname" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12 my-1">
                                     <label for="">Nama Belakang</label>
                                     <input type="text" class="form-control" value="{{ user.last_name }}"
                                         placeholder="Input last name" name="lname" required>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-12 my-1">
                                     <label for="">Email</label>
                                     <input type="text" class="form-control" value="{{ user.email }}"
                                         placeholder="Input Email" name="email" required>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-12 my-1">
                                     <label for="">No. HP</label>
                                     <input type="text" class="form-control" value="{{ userprofile.phone }}"
                                         placeholder="Input Phone" name="phone" required>
                                 </div>
-                                <div class="col-md-12 mt-2">
+                                <div class="col-12 my-1">
                                     <label for="">Alamat</label>
                                     <textarea class="form-control" placeholder="Input Address" name="address"
                                         required>{{ userprofile.address }}</textarea>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-6 my-1">
                                     <label for="">Kota</label>
                                     <input type="text" class="form-control" value="{{ userprofile.city }}"
                                         placeholder="Input City" name="city" required>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-6 my-1">
                                     <label for="">Provinsi</label>
                                     <input type="text" class="form-control" value="{{ userprofile.state }}"
                                         placeholder="Input State" name="state" required>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-6 my-1">
                                     <label for="">Negara</label>
                                     <input type="text" class="form-control" value="{{ userprofile.country }}"
                                         placeholder="Input Country" name="country" required>
                                 </div>
-                                <div class="col-md-6 mt-2">
+                                <div class="col-6 my-1">
                                     <label for="">Kode Pos</label>
                                     <input type="text" class="form-control" value="{{ userprofile.pincode }}"
                                         placeholder="Input PIN Code" name="pincode" required>
