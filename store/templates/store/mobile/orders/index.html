@@ -173,7 +173,7 @@ Transaksi
                                     </div>
                                     {% elif item.status == 'Shipped' %}
                                     <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
-                                            class="btn warna-dasar float-end mx-2 text-s btn-size">Lihat
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
                                             Pesanan</a>
                                     </div>
                                     <div class="col-4"><a
@@ -185,7 +185,7 @@ Transaksi
                                     </div>
                                     {% elif item.status == 'Completed' %}
                                     <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
-                                            class="btn warna-dasar float-end mx-2 text-s btn-size">Lihat
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
                                             Pesanan</a>
                                     </div>
                                     <div class="col-4"><a
@@ -197,7 +197,7 @@ Transaksi
                                     </div>
                                     {% elif item.status == 'Cancelled' %}
                                     <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
-                                            class="btn warna-dasar float-end mx-2 text-s btn-size">Lihat
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
                                             Pesanan</a>
                                     </div>
                                     <div class="col-4"><a href="{% url 'collections' %}"
