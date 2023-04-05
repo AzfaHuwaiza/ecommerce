@@ -16,15 +16,15 @@ urlpatterns = [
          productview, name="productview"),
 
     # Profile
-    path('profile/', ProfileView.as_view(), name='profile'),
-    path('profile/edit/', ubah_profile, name='ubah_profile'),
+    path('profil/', ProfileView.as_view(), name='profile'),
+    path('profil/ubah/', ubah_profile, name='ubah_profile'),
 
 
     # Data Pelanggan
     path('data-pelanggan/', data_pelanggan, name='data_pelanggan'),
-    path('data-pelanggan/<int:pk>/edit',
+    path('data-pelanggan/ubah/<int:pk>',
          ubah_data_pelanggan, name='ubah_data_pelanggan'),
-    path('data-pelanggan/<int:pk>/hapus',
+    path('data-pelanggan/hapus/<int:pk>',
          hapus_data_pelanggan, name='hapus_data_pelanggan'),
 
 
@@ -52,22 +52,22 @@ urlpatterns = [
 
 
     # Delete
-    path('produk/bahan/<int:id_bahan>',
+    path('gudang/bahan/hapus/<int:id_bahan>',
          hapus_bahan, name='hapus_bahan'),
-    path('produk/kategori/<int:id_kategori>',
+    path('gudang/kategori/hapus/<int:id_kategori>',
          hapus_kategori, name='hapus_kategori'),
-    path('produk/hapus/<int:id_produk>',
+    path('gudang/produk/hapus/<int:id_produk>',
          hapus_produk, name='hapus_produk'),
 
     path('product-list', productlistAjax),
     path('searchproduct', searchproduct, name='searchproduct'),
 
-    path('accounts/register/', register, name="register"),
-    path('accounts/login/', loginpage, name="loginpage"),
-    path('logout/', logoutpage, name="logout"),
+    path('daftar/', register, name="register"),
+    path('masuk/', loginpage, name="loginpage"),
+    path('keluar/', logoutpage, name="logout"),
 
     path('add-to-cart', addtocart, name="addtocart"),
-    path('cart/', viewcart, name="cart"),
+    path('keranjang/', viewcart, name="cart"),
     path('update-cart', updatecart, name="updatecart"),
     path('delete-cart-item', deletecartitem, name="deletecartitem"),
 
@@ -79,8 +79,10 @@ urlpatterns = [
     path('chechout/', checkout.index, name="chechout"),
     path('place-order', checkout.placeorder, name="placeorder"),
 
-    path('my-orders/', order.index, name="myorders"),
-    path('view-orders/<str:t_no>', order.vieworder, name="orderview"),
+    path('pesanan/', order.confirm_order, name="confirm_order"),
+    path('pesanan/<int:order_id>/mark-as-shipped/', order.mark_as_shipped, name='mark_as_shipped'),
+    path('order-list/', order.index, name="myorders"),
+    path('order/view/<str:t_no>', order.vieworder, name="orderview"),
     path('cancel-orders/<str:t_no>/',
          order.cancel_order, name='order.cancel'),
 

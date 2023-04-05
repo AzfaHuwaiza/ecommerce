@@ -41,7 +41,11 @@ def index(request):
     cartitems = Cart.objects.filter(user=request.user)
     total_price = 0
     for item in cartitems:
-        total_price = total_price + item.product.selling_price * item.product_qty
+        # total_price = total_price + item.product.selling_price * item.product_qty
+        item_total_price = item.product.selling_price * item.product_qty
+        total_price += item_total_price
+        item.item_total_price = item_total_price
+
 
     userprofile = Profile.objects.filter(user=request.user).first()
 

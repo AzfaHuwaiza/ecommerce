@@ -48,7 +48,7 @@
                                         </td>
                                         <td>{{ item.product_qty }}</td>
                                         <td>
-                                            Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
+                                            Rp {{ item.item_total_price | stringformat:'d' | intcomma }}
                                         </td>
                                     </tr>
                                     {% endfor %}

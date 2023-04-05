@@ -1,0 +1,226 @@
+{% extends 'store/mobile/layouts/main.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Transaksi
+{% endblock title %}
+
+{% block style %}
+<style>
+    .btn-size {
+        text-align: center;
+        width: 100%;
+    }
+
+    .btn-wa {
+        width: 100%;
+    }
+
+
+    .warna-dasar {
+        color: #53b4bb;
+    }
+
+    .warna-dasar:hover {
+        color: black;
+    }
+
+    .btn-dasar {
+        border: solid 1px;
+        background-color: white;
+        color: #53b4bb;
+    }
+
+    .btn-dasar:hover {
+        background-color: #53b4bb;
+        color: white;
+    }
+
+    .btn-hati {
+        background-color: #ff4949;
+        color: white;
+    }
+
+    .btn-hati:hover {
+        border: solid 1px;
+        background-color: white;
+        color: #ff4949;
+    }
+
+    .btn-hati {
+        border: solid 1px;
+        background-color: white;
+        color: #ff4949;
+    }
+
+    .btn-hati:hover {
+        background-color: #ff4949;
+        color: white;
+    }
+
+    .btn-daun {
+        color: white;
+        background-color: #0b7c1e;
+    }
+
+    .btn-daun:hover {
+        border: solid 1px;
+        color: #0b7c1e;
+        background-color: white;
+    }
+
+    .btn-abu {
+        border: solid 1px;
+        color: #6b6b6b;
+        background-color: white;
+    }
+
+    .btn-abu:hover {
+        background-color: #6b6b6b;
+        color: white;
+    }
+
+    .text-xxl {
+        font-size: 20px;
+    }
+
+    .text-xl {
+        font-size: 18px;
+    }
+
+    .text-l {
+        font-size: 16px;
+    }
+
+    .text-m {
+        font-size: 14px;
+    }
+
+    .text-s {
+        font-size: 12px;
+    }
+
+    .text-xs {
+        font-size: 10px;
+    }
+
+    .text-xxs {
+        font-size: 8px;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+{% include 'store/mobile/inc/navbar.html' %}
+
+<div class="container py-3" style="margin-bottom:30%;">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-1 mb-2">
+                <div class="container">
+                    <ol class="breadcrumb mb-0 text-xs">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{% url 'myorders' %}">Transaksi</a>
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow ">
+                    <div class="card-header">
+                        <h6 class="mb-0">Daftar Transaksi</h6>
+                    </div>
+                    {% for item in orders %}
+                    <div class="card-body">
+                        <div class="card shadow ">
+                            <div class="p-3 text-xs">
+                                <label class=""> {{ item.user.username }} </label>
+                                |
+                                <label class="">{{ item.created_at}}</label>
+                                {% if item.status == 'Pending' %}
+                                <label class="bg-warning text-dark px-1 rounded"> Tertunda </label>
+                                {% elif item.status == 'Cancelled' %}
+                                <label class="bg-danger text-light px-1 rounded"> Dibatalkan </label>
+                                {% elif item.status == 'Shipped' %}
+                                <label class="bg-primary text-light px-1 rounded"> Dikirim </label>
+                                {% elif item.status == 'Completed' %}
+                                <label class="bg-success text-light px-1 rounded"> Selesai </label>
+                                {% endif %}
+                                |
+                                <label class=""> {{ item.tracking_no }} </label>
+                                <hr>
+                                <div>
+                                    Total Harga: Rp {{ item.total_price | stringformat:'d' | intcomma }}
+                                </div>
+                                <div class=" mt-3 row">
+                                    {% if item.status == 'Pending' %}
+                                    <div class="col-4 "><a href="{% url 'orderview' item.tracking_no %}"
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
+                                            Pesanan</a>
+                                    </div>
+                                    <div class="col-4"><a href="{% url 'order.cancel' item.tracking_no %}"
+                                            class="btn btn-hati float-end mx-2 text-s btn-size">Batalkan Pesanan</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                            target="_blank" class="btn btn-daun float-end mx-2 text-s btn-wa"><i
+                                                class=" fab fa-whatsapp"></i> Hubungi</a>
+                                    </div>
+                                    {% elif item.status == 'Shipped' %}
+                                    <div class="col-4"></div>
+                                    <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
+                                            Pesanan</a>
+                                    </div>
+                                    <div class="col-4"><a
+                                            href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                            target="_blank" class="btn btn-daun float-end mx-2 text-s btn-size"><i
+                                                class=" fab
+                                    fa-whatsapp"></i>
+                                            Hubungi</a>
+                                    </div>
+                                    {% elif item.status == 'Completed' %}
+                                    <div class="col-4"></div>
+                                    <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
+                                            Pesanan</a>
+                                    </div>
+                                    <div class="col-4"><a
+                                            href="https://wa.me/6282123824490?text=I'm%20interested%20in%20to%20chat"
+                                            target="_blank" class="btn btn-daun float-end mx-2 text-s btn-size"><i
+                                                class=" fab
+                                    fa-whatsapp"></i>
+                                            Rating</a>
+                                    </div>
+                                    {% elif item.status == 'Cancelled' %}
+                                    <div class="col-4"></div>
+                                    <div class="col-4"><a href="{% url 'orderview' item.tracking_no %}"
+                                            class="btn warna-dasar float-end mx-2 text-s btn-dasar btn-size">Lihat
+                                            Pesanan</a>
+                                    </div>
+                                    <div class="col-4"><a href="{% url 'collections' %}"
+                                            class="btn btn-abu float-end mx-2 text-s btn-size"><i
+                                                class="fa fa-shop"></i>Belanja</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

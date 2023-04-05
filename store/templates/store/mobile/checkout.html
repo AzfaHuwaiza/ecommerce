@@ -99,7 +99,7 @@ Checkout
                                         </td>
                                         <td class="text-xs">{{ item.product_qty }}</td>
                                         <td class="text-xs">
-                                            Rp {{ item.product.selling_price | stringformat:'d' | intcomma }}
+                                            Rp {{ item.item_total_price | stringformat:'d' | intcomma }}
                                         </td>
                                     </tr>
                                     {% endfor %}

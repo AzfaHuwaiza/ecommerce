@@ -57,7 +57,10 @@ def viewcart(request):
         template_name = 'store/desktop/cart.html'
 
     cart = Cart.objects.filter(user=request.user)
-    context = {'cart': cart}
+    total_price = 0
+    for item in cart:
+        total_price = total_price + item.product.selling_price * item.product_qty
+    context = {'cart': cart, 'total_price': total_price}
     return render(request, template_name, context)
 
 
